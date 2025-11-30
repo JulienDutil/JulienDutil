@@ -1,67 +1,52 @@
-// Smooth scroll for internal links
-document.addEventListener("click", function (e) {
-  const link = e.target.closest('a[href^="#"]');
-  if (!link) return;
+// Reveal animations
+const revealElements = document.querySelectorAll(".reveal");
 
-  const targetId = link.getAttribute("href");
-  if (!targetId || targetId === "#") return;
-
-  const target = document.querySelector(targetId);
-  if (!target) return;
-
-  e.preventDefault();
-  const top = target.getBoundingClientRect().top + window.scrollY - 80;
-
-  window.scrollTo({
-    top,
-    behavior: "smooth"
-  });
-});
-
-// Reveal on scroll
-const revealEls = document.querySelectorAll(".reveal");
-
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.12
-    }
-  );
-
-  revealEls.forEach((el) => observer.observe(el));
-} else {
-  // Fallback
-  revealEls.forEach((el) => el.classList.add("visible"));
-}
-
-// Project cards jump to detailed section
-document.querySelectorAll(".project-card").forEach((card) => {
-  card.addEventListener("click", () => {
-    const targetSelector = card.getAttribute("data-target");
-    if (!targetSelector) return;
-    const target = document.querySelector(targetSelector);
-    if (!target) return;
-
-    const top = target.getBoundingClientRect().top + window.scrollY - 80;
-
-    window.scrollTo({
-      top,
-      behavior: "smooth"
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
+      }
     });
+  },
+  { threshold: 0.1 }
+);
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+
+// Accordion logic
+document.querySelectorAll(".project-accordion").forEach(item => {
+  item.querySelector(".accordion-header").addEventListener("click", () => {
+    item.classList.toggle("open");
   });
 });
+
+
+// Language toggle logic
+const langToggle = document.getElementById("lang-toggle");
+const body = document.body;
+
+// Load saved language
+const savedLang = localStorage.getItem("lang") || "en";
+if (savedLang === "fr") body.classList.add("lang-fr-active");
+
+langToggle.addEventListener("click", () => {
+  body.classList.toggle("lang-fr-active");
+
+  const lang = body.classList.contains("lang-fr-active") ? "fr" : "en";
+  localStorage.setItem("lang", lang);
+});
+
+
+// Timeline horizontal scrolling (optional smooth)
+const timeline = document.querySelector(".timeline-horizontal");
+timeline.addEventListener("wheel", function (e) {
+  e.preventDefault();
+  timeline.scrollLeft += e.deltaY * 0.6;
+});
+
 
 // Footer year
-const yearSpan = document.getElementById("year");
-if (yearSpan) {
-  yearSpan.textContent = new Date().getFullYear();
-}
-
+document.getElementById("year").textContent = new Date().getFullYear();
