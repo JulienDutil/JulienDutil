@@ -1,4 +1,6 @@
-// Reveal on scroll
+/* ============================
+   Reveal on Scroll
+============================ */
 const revealElements = document.querySelectorAll(".reveal");
 
 if ("IntersectionObserver" in window) {
@@ -19,29 +21,38 @@ if ("IntersectionObserver" in window) {
   revealElements.forEach(el => el.classList.add("visible"));
 }
 
-// Accordion logic with smooth slide
+/* ============================
+   Smooth Accordion
+============================ */
 document.querySelectorAll(".project-accordion").forEach(item => {
   const header = item.querySelector(".accordion-header");
   const body = item.querySelector(".accordion-body");
-  if (!header || !body) return;
-
-  // Ensure closed state
-  body.style.maxHeight = "0px";
 
   header.addEventListener("click", () => {
     const isOpen = item.classList.contains("open");
 
-    if (isOpen) {
-      body.style.maxHeight = "0px";
-      item.classList.remove("open");
-    } else {
+    // Close all other accordions
+    document.querySelectorAll(".project-accordion.open").forEach(openItem => {
+      if (openItem !== item) {
+        openItem.classList.remove("open");
+        openItem.querySelector(".accordion-body").style.maxHeight = null;
+      }
+    });
+
+    // Toggle this accordion
+    item.classList.toggle("open");
+
+    if (!isOpen) {
       body.style.maxHeight = body.scrollHeight + "px";
-      item.classList.add("open");
+    } else {
+      body.style.maxHeight = null;
     }
   });
 });
 
-// Featured cards scroll to corresponding accordion
+/* ============================
+   Featured Cards → Scroll to Project
+============================ */
 document.querySelectorAll(".featured-card").forEach(card => {
   card.addEventListener("click", () => {
     const targetKey = card.getAttribute("data-target");
@@ -52,44 +63,38 @@ document.querySelectorAll(".featured-card").forEach(card => {
     );
     if (!targetAccordion) return;
 
-    const body = targetAccordion.querySelector(".accordion-body");
-    if (!body) return;
-
-    // Open it if not already
-    const isOpen = targetAccordion.classList.contains("open");
-    if (!isOpen) {
+    // Open it if not open
+    if (!targetAccordion.classList.contains("open")) {
       targetAccordion.classList.add("open");
+      const body = targetAccordion.querySelector(".accordion-body");
       body.style.maxHeight = body.scrollHeight + "px";
     }
 
-    const rect = targetAccordion.getBoundingClientRect();
-    const offset = window.scrollY + rect.top - 90;
-
-    window.scrollTo({
-      top: offset,
-      behavior: "smooth"
-    });
+    const offset = targetAccordion.offsetTop - 80;
+    window.scrollTo({ top: offset, behavior: "smooth" });
   });
 });
 
-// Language toggle logic
+/* ============================
+   Language Toggle
+============================ */
 const langToggle = document.getElementById("lang-toggle");
-const bodyEl = document.body;
+const body = document.body;
 
 const savedLang = localStorage.getItem("lang") || "en";
 if (savedLang === "fr") {
-  bodyEl.classList.add("lang-fr-active");
+  body.classList.add("lang-fr-active");
 }
 
-if (langToggle) {
-  langToggle.addEventListener("click", () => {
-    bodyEl.classList.toggle("lang-fr-active");
-    const lang = bodyEl.classList.contains("lang-fr-active") ? "fr" : "en";
-    localStorage.setItem("lang", lang);
-  });
-}
+langToggle.addEventListener("click", () => {
+  body.classList.toggle("lang-fr-active");
+  const lang = body.classList.contains("lang-fr-active") ? "fr" : "en";
+  localStorage.setItem("lang", lang);
+});
 
-// Horizontal timeline scroll with mouse wheel
+/* ============================
+   Horizontal Timeline Scroll
+============================ */
 const timeline = document.querySelector(".timeline-horizontal");
 if (timeline) {
   timeline.addEventListener("wheel", e => {
@@ -99,53 +104,50 @@ if (timeline) {
   });
 }
 
-// Lightbox for gallery thumbnails
+/* ============================
+   Footer Year
+============================ */
+const yearSpan = document.getElementById("year");
+yearSpan.textContent = new Date().getFullYear();
+
+/* ============================
+   Lightbox for Project Images
+============================ */
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
-const lightboxBackdrop = lightbox ? lightbox.querySelector(".lightbox-backdrop") : null;
+const lightboxBackdrop = document.querySelector(".lightbox-backdrop");
 
-function openLightbox(src, alt) {
-  if (!lightbox || !lightboxImg) return;
-  lightboxImg.src = src;
-  lightboxImg.alt = alt || "";
-  lightbox.classList.add("visible");
-}
-
-function closeLightbox() {
-  if (!lightbox || !lightboxImg) return;
-  lightbox.classList.remove("visible");
-  lightboxImg.src = "";
-  lightboxImg.alt = "";
-}
-
-document.querySelectorAll(".project-thumb").forEach(img => {
-  img.addEventListener("click", () => {
-    const fullSrc = img.getAttribute("data-full") || img.src;
-    const alt = img.alt || "";
-    openLightbox(fullSrc, alt);
+document.querySelectorAll(".project-thumb").forEach(thumb => {
+  thumb.addEventListener("click", () => {
+    const fullSrc = thumb.getAttribute("data-full");
+    lightboxImg.src = fullSrc;
+    lightbox.classList.add("visible");
   });
 });
 
-if (lightboxBackdrop) {
-  lightboxBackdrop.addEventListener("click", closeLightbox);
-}
+// Close lightbox on backdrop click
+lightboxBackdrop.addEventListener("click", () => {
+  lightbox.classList.remove("visible");
+  lightboxImg.src = "";
+});
 
-if (lightbox) {
-  lightbox.addEventListener("click", e => {
-    if (e.target === lightbox) {
-      closeLightbox();
-    }
-  });
-}
-
+// Close on Escape key
 document.addEventListener("keydown", e => {
-  if (e.key === "Escape") {
-    closeLightbox();
+  if (e.key === "Escape" && lightbox.classList.contains("visible")) {
+    lightbox.classList.remove("visible");
+    lightboxImg.src = "";
   }
 });
 
-// Footer year
-const yearSpan = document.getElementById("year");
-if (yearSpan) {
-  yearSpan.textContent = new Date().getFullYear();
-}
+/* ============================
+   Smooth Scrolling for Nav Links
+============================ */
+document.querySelectorAll('.main-nav a[href^="#"]').forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) return;
+    const offset = target.offsetTop - 80;
+    window.scrollTo({ top: offset, behavior: "smooth" });
+  });
+});
