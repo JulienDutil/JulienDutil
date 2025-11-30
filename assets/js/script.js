@@ -1,6 +1,4 @@
-/* ============================
-   Reveal on Scroll
-============================ */
+// Reveal on scroll
 const revealElements = document.querySelectorAll(".reveal");
 
 if ("IntersectionObserver" in window) {
@@ -21,38 +19,17 @@ if ("IntersectionObserver" in window) {
   revealElements.forEach(el => el.classList.add("visible"));
 }
 
-/* ============================
-   Smooth Accordion
-============================ */
+// Accordion logic
 document.querySelectorAll(".project-accordion").forEach(item => {
   const header = item.querySelector(".accordion-header");
-  const body = item.querySelector(".accordion-body");
+  if (!header) return;
 
   header.addEventListener("click", () => {
-    const isOpen = item.classList.contains("open");
-
-    // Close all other accordions
-    document.querySelectorAll(".project-accordion.open").forEach(openItem => {
-      if (openItem !== item) {
-        openItem.classList.remove("open");
-        openItem.querySelector(".accordion-body").style.maxHeight = null;
-      }
-    });
-
-    // Toggle this accordion
     item.classList.toggle("open");
-
-    if (!isOpen) {
-      body.style.maxHeight = body.scrollHeight + "px";
-    } else {
-      body.style.maxHeight = null;
-    }
   });
 });
 
-/* ============================
-   Featured Cards → Scroll to Project
-============================ */
+// Featured cards scroll to corresponding accordion
 document.querySelectorAll(".featured-card").forEach(card => {
   card.addEventListener("click", () => {
     const targetKey = card.getAttribute("data-target");
@@ -63,21 +40,21 @@ document.querySelectorAll(".featured-card").forEach(card => {
     );
     if (!targetAccordion) return;
 
-    // Open it if not open
     if (!targetAccordion.classList.contains("open")) {
       targetAccordion.classList.add("open");
-      const body = targetAccordion.querySelector(".accordion-body");
-      body.style.maxHeight = body.scrollHeight + "px";
     }
 
-    const offset = targetAccordion.offsetTop - 80;
-    window.scrollTo({ top: offset, behavior: "smooth" });
+    const rect = targetAccordion.getBoundingClientRect();
+    const offset = window.scrollY + rect.top - 90;
+
+    window.scrollTo({
+      top: offset,
+      behavior: "smooth"
+    });
   });
 });
 
-/* ============================
-   Language Toggle
-============================ */
+// Language toggle logic
 const langToggle = document.getElementById("lang-toggle");
 const body = document.body;
 
@@ -86,15 +63,15 @@ if (savedLang === "fr") {
   body.classList.add("lang-fr-active");
 }
 
-langToggle.addEventListener("click", () => {
-  body.classList.toggle("lang-fr-active");
-  const lang = body.classList.contains("lang-fr-active") ? "fr" : "en";
-  localStorage.setItem("lang", lang);
-});
+if (langToggle) {
+  langToggle.addEventListener("click", () => {
+    body.classList.toggle("lang-fr-active");
+    const lang = body.classList.contains("lang-fr-active") ? "fr" : "en";
+    localStorage.setItem("lang", lang);
+  });
+}
 
-/* ============================
-   Horizontal Timeline Scroll
-============================ */
+// Horizontal timeline scroll with mouse wheel
 const timeline = document.querySelector(".timeline-horizontal");
 if (timeline) {
   timeline.addEventListener("wheel", e => {
@@ -104,50 +81,36 @@ if (timeline) {
   });
 }
 
-/* ============================
-   Footer Year
-============================ */
-const yearSpan = document.getElementById("year");
-yearSpan.textContent = new Date().getFullYear();
-
-/* ============================
-   Lightbox for Project Images
-============================ */
+// Lightbox for project gallery
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
-const lightboxBackdrop = document.querySelector(".lightbox-backdrop");
+const lightboxBackdrop = lightbox ? lightbox.querySelector(".lightbox-backdrop") : null;
 
-document.querySelectorAll(".project-thumb").forEach(thumb => {
-  thumb.addEventListener("click", () => {
-    const fullSrc = thumb.getAttribute("data-full");
-    lightboxImg.src = fullSrc;
-    lightbox.classList.add("visible");
+if (lightbox && lightboxImg && lightboxBackdrop) {
+  document.querySelectorAll(".project-thumb").forEach(img => {
+    img.addEventListener("click", () => {
+      const fullSrc = img.getAttribute("data-full") || img.src;
+      lightboxImg.src = fullSrc;
+      lightbox.classList.add("visible");
+    });
   });
-});
 
-// Close lightbox on backdrop click
-lightboxBackdrop.addEventListener("click", () => {
-  lightbox.classList.remove("visible");
-  lightboxImg.src = "";
-});
-
-// Close on Escape key
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && lightbox.classList.contains("visible")) {
+  const closeLightbox = () => {
     lightbox.classList.remove("visible");
     lightboxImg.src = "";
-  }
-});
+  };
 
-/* ============================
-   Smooth Scrolling for Nav Links
-============================ */
-document.querySelectorAll('.main-nav a[href^="#"]').forEach(link => {
-  link.addEventListener("click", e => {
-    e.preventDefault();
-    const target = document.querySelector(link.getAttribute("href"));
-    if (!target) return;
-    const offset = target.offsetTop - 80;
-    window.scrollTo({ top: offset, behavior: "smooth" });
+  lightboxBackdrop.addEventListener("click", closeLightbox);
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && lightbox.classList.contains("visible")) {
+      closeLightbox();
+    }
   });
-});
+}
+
+// Footer year
+const yearSpan = document.getElementById("year");
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
+}
