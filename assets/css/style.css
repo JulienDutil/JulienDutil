@@ -731,6 +731,26 @@ body.lang-fr-active .lang-fr {
   transform: translateY(0);
 }
 
+.hero {
+  width: 100%;
+  text-align: center !important;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-inner {
+  text-align: center;
+  width: 100%;
+}
+
+.hero-title {
+  text-align: center;
+  margin: 0 auto;
+  color: var(--text-main) !important;
+  font-size: clamp(2.8rem, 6vw, 3.6rem) !important;
+  font-weight: 700;
+}
+
 /* RESPONSIVE */
 @media (max-width: 880px) {
   .about-wrapper {
