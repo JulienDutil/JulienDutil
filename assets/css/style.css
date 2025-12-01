@@ -745,10 +745,11 @@ body.lang-fr-active .lang-fr { display: inline; }
   padding-bottom: 0 !important;
 }
 
+/* Your custom spacing override BELOW */
 .cv-bottom {
-  margin-bottom: 2rem !important;
+  margin-top: 3.5rem;
+  margin-bottom: 3rem;
 }
-
 
 @media (max-width: 600px) {
   .timeline-horizontal {
