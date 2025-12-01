@@ -763,6 +763,14 @@ body.lang-fr-active .lang-fr { display: inline; }
   padding-bottom: 3rem !important;
 }
 
+#skills {
+  background: red !important;
+}
+
+#contact {
+  background: blue !important;
+}
+
 @media (max-width: 600px) {
   .timeline-horizontal {
     gap: 2rem;
