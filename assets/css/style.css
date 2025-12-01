@@ -24,6 +24,7 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  background: radial-gradient(circle at top, #171a31 0, #171a31 45%, #05060b 85%, #020309 100%);
 }
 
 /* Reset */
@@ -34,7 +35,7 @@ html {
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  background: radial-gradient(circle at top, #171a31 0, #171a31 45%, #05060b 85%, #020309 100%);
+  background: transparent;
   color: var(--text-main);
   font-size: 1.05rem;
 }
@@ -196,7 +197,7 @@ h1, h2, h3, h4 {
 }
 
 .section.alt-bg {
-  background: radial-gradient(circle at top, #171a31 0, #171a31 45%, #05060b 85%, #020309 100%);
+  background: transparent;
 }
 
 .section-intro {
