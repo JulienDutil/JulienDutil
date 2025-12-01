@@ -124,7 +124,7 @@ h1, h2, h3, h4 {
 .main-nav a:hover {
   background: rgba(255, 255, 255, 0.08);
   color: var(--text-main);
-  transform: translateY(-1px);
+  transform: translateY(1px);
 }
 
 .header-actions {
@@ -176,7 +176,7 @@ h1, h2, h3, h4 {
 }
 
 .primary-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(1px);
   box-shadow: 0 14px 32px rgba(168, 132, 255, 0.75);
 }
 
@@ -188,7 +188,7 @@ h1, h2, h3, h4 {
 
 .secondary-btn:hover {
   background: rgba(168, 132, 255, 0.18);
-  transform: translateY(-2px);
+  transform: translateY(1px);
 }
 
 /* Sections */
@@ -196,21 +196,7 @@ h1, h2, h3, h4 {
   padding: 2rem 0;
 }
 
-#skills {
-  padding: 2rem 0;
-}
-
-.section.alt-bg {
-  background: transparent;
-}
-
-.section-intro {
-  margin: 0.4rem 0 1.8rem;
-  max-width: 650px;
-  color: var(--text-muted);
-}
-
-/* HERO */
+/* Hero */
 .hero {
   padding: 5rem 0 3rem;
   text-align: center;
@@ -233,7 +219,7 @@ h1, h2, h3, h4 {
   color: var(--text-main);
 }
 
-/* ABOUT */
+/* About */
 .about-wrapper {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
@@ -273,7 +259,7 @@ h1, h2, h3, h4 {
 .about-card:hover {
   border-color: var(--accent);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
-  transform: translateY(-2px);
+  transform: translateY(1px);
 }
 
 .about-card h4 {
@@ -289,7 +275,7 @@ h1, h2, h3, h4 {
   font-size: 0.98rem;
 }
 
-/* FEATURED GRID */
+/* Featured */
 .featured-grid {
   margin-top: 2rem;
   display: grid;
@@ -310,19 +296,13 @@ h1, h2, h3, h4 {
   margin: 0.7rem 0 0.4rem;
 }
 
-.featured-card p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.98rem;
-}
-
 .featured-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(1px);
   border-color: var(--accent);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
 }
 
-/* UPCOMING */
+/* Upcoming */
 .upcoming-box {
   margin-top: 1.7rem;
   display: grid;
@@ -340,10 +320,6 @@ h1, h2, h3, h4 {
 
 .upcoming-actions {
   margin-top: 1.2rem;
-}
-
-.upcoming-actions .btn {
-  min-height: 3rem;
 }
 
 /* Accordion */
@@ -408,7 +384,6 @@ h1, h2, h3, h4 {
 
 .project-main-media img {
   width: 100%;
-  border-radius: var(--radius-lg);
 }
 
 .project-main-content p {
@@ -437,29 +412,13 @@ h1, h2, h3, h4 {
 }
 
 .project-thumb:hover {
-  transform: translateY(-2px);
+  transform: translateY(1px);
   border-color: var(--accent);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
 }
 
 .project-extra-media {
   margin-top: 1.4rem;
-}
-
-.video-wrapper {
-  position: relative;
-  padding-top: 56.25%;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--border-subtle);
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
 }
 
 /* Tags */
@@ -474,7 +433,7 @@ h1, h2, h3, h4 {
   color: #e5ddff;
 }
 
-/* TIMELINE */
+/* Timeline */
 #timeline .container {
   overflow-x: auto;
   padding-bottom: 1rem;
@@ -530,7 +489,7 @@ h1, h2, h3, h4 {
   color: var(--text-muted);
 }
 
-/* CONTACT */
+/* Contact */
 .contact-list {
   list-style: none;
   margin-top: 1.4rem;
@@ -555,7 +514,7 @@ h1, h2, h3, h4 {
   text-decoration: underline;
 }
 
-/* LIGHTBOX */
+/* Lightbox */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -585,46 +544,27 @@ h1, h2, h3, h4 {
 .lightbox-content img {
   max-width: 100%;
   max-height: 100%;
-  border-radius: var(--radius-lg);
 }
 
-/* SKILLS */
-.skills-pill-groups {
-  margin-top: 2rem;
-  display: grid;
-  gap: 1.6rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-}
-
-.skills-pill-groups {
-  justify-items: start;
-}
-
-#skills .skills-pill-groups {
-  margin-bottom: 4rem;
-}
-
-#skills .container {
-  padding-left: 1.4rem;
-  padding-right: 1.4rem;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1040px;
-}
-
+/* Skills */
 #skills {
+  padding: 2rem 0;
   text-align: left;
 }
 
-/* Soft glow pills */
+.skills-pill-groups {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  display: grid;
+  gap: 1.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  justify-items: start;
+}
+
 .skills-pill-group {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-}
-
-.skills-pill-group h3 {
-  margin-bottom: 0.2rem;
 }
 
 .skills-pill-list {
@@ -644,20 +584,19 @@ h1, h2, h3, h4 {
   font-size: 0.95rem;
   box-shadow: 0 0 12px rgba(168, 132, 255, 0.22);
   transition: var(--transition-fast);
-  cursor: default;
 }
 
 .skill-pill:hover {
   border-color: var(--accent);
   background: rgba(168, 132, 255, 0.12);
   box-shadow: 0 0 18px rgba(168, 132, 255, 0.35);
-  transform: translateY(-2px);
+  transform: translateY(1px);
 }
 
-/* CV bottom button */
+/* CV bottom */
 .cv-bottom {
-  margin-top: 1;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
@@ -667,11 +606,12 @@ h1, h2, h3, h4 {
   transform: scale(1.05);
 }
 
+/* Contact spacing */
 #contact {
   padding-top: 1rem;
 }
 
-/* LANGUAGE CONTROL */
+/* Language */
 .lang {
   display: inline;
 }
@@ -688,7 +628,7 @@ body.lang-fr-active .lang-fr {
   display: inline;
 }
 
-/* REVEAL */
+/* Reveal animation */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -700,7 +640,7 @@ body.lang-fr-active .lang-fr {
   transform: translateY(0);
 }
 
-/* FOOTER */
+/* Footer */
 .site-footer {
   padding: 1.8rem 0 2.2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -715,25 +655,7 @@ body.lang-fr-active .lang-fr {
   color: var(--text-muted);
 }
 
-/* FINAL SPACING OVERRIDES */
-#skills .skills-pill-groups {
-  margin-bottom: 2rem;
-}
-
-.cv-bottom {
-  margin-top: 0;
-  margin-bottom: 2rem;
-}
-
-#contact {
-  padding-top: 1rem;
-}
-
-.cv-bottom {
-  margin-top: 3rem;
-}
-
-/* RESPONSIVE */
+/* Responsive */
 @media (max-width: 880px) {
   .about-wrapper {
     grid-template-columns: 1fr;
@@ -752,22 +674,6 @@ body.lang-fr-active .lang-fr {
     justify-content: center;
   }
 }
-
-/* Clean spacing so the bottom CV button is centered */
-#skills {
-  padding-bottom: 4rem;
-}
-
-.cv-bottom {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-  text-align: center;
-}
-
-#contact {
-  padding-top: 4rem;
-}
-
 
 @media (max-width: 600px) {
   .timeline-horizontal {
