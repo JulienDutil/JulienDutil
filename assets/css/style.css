@@ -196,16 +196,8 @@ h1, h2, h3, h4 {
   padding: 4rem 0;
 }
 
-#skills.section {
-  padding-bottom: 0; /* remove lower padding so the button can float freely */
-}
-
 #skills {
   padding-bottom: 6rem;
-}
-
-#skills.section {
-  padding-bottom: 1.5rem; /* was 4rem — gives space to center the button */
 }
 
 .section.alt-bg {
@@ -216,11 +208,6 @@ h1, h2, h3, h4 {
   margin: 0.4rem 0 1.8rem;
   max-width: 650px;
   color: var(--text-muted);
-}
-
-#skills.section {
-  display: flex;
-  flex-direction: column;
 }
 
 /* HERO */
@@ -660,6 +647,11 @@ h1, h2, h3, h4 {
   margin-top: 5rem;  /* push it DOWN away from skills */
   margin-bottom: -2rem; /* pull it UP toward contact */
   text-align: center;
+}
+
+.cv-bottom .btn {
+  padding: 0.75rem 1.7rem;
+  font-size: 1.15rem;
 }
 
 /* LANGUAGE CONTROL */
