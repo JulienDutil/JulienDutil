@@ -36,9 +36,25 @@ html {
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  background: radial-gradient(circle at top, #231c4a 0, #171a31 35%, #05060b 80%, #020309 100%);
+
+  /* Smooth continuous vertical gradient for whole site */
+  background: linear-gradient(
+    to bottom,
+    #171a31 0%,
+    #0d0f1b 35%,
+    #090a14 60%,
+    #05060b 100%
+  );
   color: var(--text-main);
-  font-size: 1.15rem;
+}
+
+/* Alternate section background (slightly lighter but still blending) */
+.alt-bg {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.02) 0%,
+    rgba(255,255,255,0.00) 100%
+  );
 }
 
 img {
@@ -453,59 +469,44 @@ h1, h2, h3 {
 
 /* Timeline */
 .timeline-horizontal {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: flex;
-  gap: 2.2rem;
+  gap: 2.5rem;
   overflow-x: auto;
-  padding-bottom: 1.8rem;
+  padding-bottom: 1.2rem;
   position: relative;
 }
 
-/* Timeline line */
+/* The gradient line behind the dots */
 .timeline-horizontal::before {
   content: "";
   position: absolute;
+  top: 38px; /* below labels, above bottom */
   left: 0;
-  right: 0;
-  top: 46px;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(142, 108, 255, 0.8), rgba(142, 108, 255, 0.2));
-}
-
-/* Timeline scrollbar */
-.timeline-horizontal::-webkit-scrollbar {
-  height: 7px;
-}
-
-.timeline-horizontal::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-
-.timeline-horizontal::-webkit-scrollbar-thumb {
-  background: rgba(142, 108, 255, 0.9);
-  border-radius: 4px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #6f4aff, #b79cff);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .time-block {
-  min-width: 170px;
+  min-width: 140px;
   text-align: center;
-}
-
-.time-block .date {
-  display: block;
-  font-size: 1.1rem;
-  color: var(--text-muted);
+  position: relative;
+  z-index: 2; /* Keeps text above the line */
 }
 
 .time-block .dot {
   width: 16px;
   height: 16px;
   border-radius: 50%;
+  margin: 0.4rem auto 0.3rem auto;
   background: var(--accent);
-  margin: 0.6rem auto;
-  box-shadow: 0 0 12px rgba(142, 108, 255, 0.9);
+  box-shadow: 0 0 10px rgba(142, 108, 255, 0.9);
   position: relative;
+  z-index: 3; /* Dot above line */
 }
 
 .time-block p {
