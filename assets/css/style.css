@@ -45,6 +45,10 @@ img {
   border-radius: var(--radius-lg);
 }
 
+p {
+  color: var(--text-muted);
+}
+
 /* Layout */
 .container {
   max-width: 1040px;
@@ -236,10 +240,9 @@ h1, h2, h3, h4 {
 .about-text-block {
   font-size: 1.05rem;
   line-height: 1.6;
-  color: var(--text-main);
+  color: var(--text-muted);
 }
 
-.about-text-block p,
 .about-text-block h3,
 .about-text-block h2 {
   color: var(--text-main);
@@ -484,7 +487,7 @@ h1, h2, h3, h4 {
 
 .timeline-line {
   position: absolute;
-  top: 50%;
+  top: calc(50% + 7px);
   transform: translateY(-50%);
   left: 0;
   height: 3px;
