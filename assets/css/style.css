@@ -704,6 +704,20 @@ body.lang-fr-active .lang-fr { display: inline; }
   color: var(--text-muted);
 }
 
+* FINAL SPACING OVERRIDES */
+#skills .skills-pill-groups {
+  margin-bottom: 2rem;   /* Skills → CV */
+}
+
+.cv-bottom {
+  margin-top: 0;
+  margin-bottom: 2rem;   /* CV → Contact */
+}
+
+#contact {
+  padding-top: 1rem;     /* reduce default 4rem padding */
+}
+
 /* RESPONSIVE */
 @media (max-width: 880px) {
   .about-wrapper {
